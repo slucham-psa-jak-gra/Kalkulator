@@ -1,32 +1,29 @@
 package kalkulator;
 
-import java.util.Scanner;
-
-/**
- * Created by slucham-psa-jak-gra on 6/29/16.
- */
 public class Kalkulator {
+    private final Calculator calculator;
+    private final InputProvider inputProvider;
+
+    public Kalkulator() {
+        this.calculator = new SimpleCalculator();
+        this.inputProvider = new ConsoleInputProvider();
+    }
+
+    public void run() {
+        while (true) {
+            String input = inputProvider.next();
+            double result;
+            try {
+                result = calculator.calculate(input);
+                System.out.println("Wynik: " + result);
+            } catch (CalculatorException e) {
+                System.out.println("Blad, nie udalo sie obliczyc wyrazenia" + input);
+            }
+        }
+    }
+
     public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
-        System.out.print("Podaj: ");
-        String expr = in.nextLine();
-        String[] arr = expr.split(" ");
-        long n1 = Long.parseLong(arr[0]);
-        String operator = arr[1];
-        long n2 = Long.parseLong(arr[2]);
-        long result = 0;
-        if (operator.equals("+")) {
-            result = n1 + n2;
-        }
-        else if (operator.equals("-")) {
-            result = n1 - n2;
-        }
-        else if (operator.equals("*")) {
-            result = n1 * n2;
-        }
-        else if (operator.equals("/")) {
-            result = n1 / n2;
-        }
-        System.out.println("Wynik: " + result);
+        Kalkulator kalkulator = new Kalkulator();
+        kalkulator.run();
     }
 }
