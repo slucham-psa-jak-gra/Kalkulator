@@ -5,7 +5,7 @@ public class Kalkulator {
     private final InputProvider inputProvider;
 
     public Kalkulator() {
-        this.calculator = new SimpleCalculator();
+        this.calculator = new RPNCalculator();
         this.inputProvider = new ConsoleInputProvider();
     }
 
